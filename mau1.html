@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mẫu 3</title>
+    <link rel='SHORTCUT ICON' href='http://cloud2.vnwifi.com/favicon.ico' type='image/x-icon' />
+    <link href="http://cloud2.vnwifi.com/Lib/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cloud2.vnwifi.com/scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="http://cloud2.vnwifi.com/Lib/template-builder/TemplateBuilder.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="http://cloud2.vnwifi.com/Lib/template-builder/TemplateBuilder.js"></script>
+    <style>
+        body{
+            font-family:arial;
+        }
+        #for-process-loading{
+            margin:0px;
+            padding:0px;
+            width:100%;
+            height:100vh;
+            background-color:#fff;
+		    opacity:0.5;
+            position:fixed;
+            top:0px;
+            left:0px;
+            z-index:100;
+        }
+        #for-process-loading-img{
+            margin:0px;
+		    padding:0px;
+		    width:100%;
+		    height:100vh;
+		    position:absolute;
+		    top:0px;
+		    left:0px;
+		    z-index:101;
+		    background-image:url('http://cloud2.vnwifi.com/templates/loading.gif');
+            background-position:center center;
+            background-repeat:no-repeat;
+	    }
+	    .for-loading{
+		    display:none;
+	    }
+    #waiting5s{
+            margin:0px;
+            padding:1px 0px;
+            width:100%;
+            height:15px;
+            background-color:#ffea00;
+            position:fixed;
+    top:0px;
+            left:0px;
+            color:#003cff;
+            text-align:left;
+            font-size:10px;
+            font-family:Arial;
+            display:none;
+        }
+        .fb-fake-like{
+            margin:0 auto;
+            padding:0px;
+            margin-bottom:10px;
+            width:57px;
+            height:24px;
+            background-image:url('http://cloud2.vnwifi.com/templates/button-facebook-like.png');
+    background-position:center center;
+    background-repeat:no-repeat;
+            cursor:pointer;
+        }
+        .for-login-like-pane{
+            margin:0 auto;
+            margin-top:10px;
+            margin-bottom:10px;
+            padding:10px 0px 0px 0px;
+            background-color:#f9fcfe;
+            border:1px solid #ccc;
+            border-left:none;
+            border-right:none;
+            width:100%;
+            display:none;
+        }
+        .for-login-like-pane p{
+        margin:0px 0px 10px 0px;
+        padding:0px;
+        color:#000;
+            font-family:Arial;
+        font-size:12px;
+        text-align:center;
+    }
+        .fb-page, .fb-page iframe[style], .fb-page span {
+        width: 100% !important;
+    }
+        .fb-page {text-align: center;}
+        .fb_iframe_widget {display: block !important;}
+    </style>
+</head>
+<body>
+    
+    <script>
+        /*
+        ============
+        SETTING DATA
+        ============
+        */
+
+        var ViewEditMode = true;
+        var _running_owner = '';
+        var _running_campaign_used = '';
+        var _running_campaign_id = '';
+        var _running_google_appid = '';
+        var _running_fb_appid = '';
+        var _running_auto_action = 0;
+        var _running_user_id = '';
+        var _running_client_mac = '';
+        var _running_location_id = '';
+        var _running_template_id = 'est-offee';
+        var _running_template_version = '';
+        var _running_login_option = 'questionaire';
+        var _running_login_option_question_group = 'b93acad5-c1e9-44db-bb10-04867a31b01e';
+        var _running_login_option_question_answred = '0';
+        var _running_login_option_question = ['1','1'];
+        var _running_login_option_question_ids = [];
+        var _running_login_option_question_values = [];
+        var _running_login_option_question_types = [];
+        var _running_login_option_question_required = [];
+        var _running_login_option_question_personal = [];
+        var _running_ip_local = '';
+        var _running_ip_public = '';
+
+        var _running_action_portal = '';
+        var _running_langding_page_id = '';
+        var _running_langding_page = '';
+        var _running_wifi_login_names = [];
+        var _running_wifi_login_values = [];
+        var _running_page_to_like_url = '';
+        var _running_placeid_to_checkin = '';
+        var _running_ready_to_checkin = false;
+        var AutoSecBegin = _running_auto_action;
+        var _running_post_type = '0';
+        var _running_openmesh_login = '';
+        var _running_account_kit_state = '';
+
+        // PERSONAL INFORMATION COLLECTION
+
+        var _mac_phone_found = '0';              var _phone_found = '';
+        var _mac_name_found = '0';                var _name_found = '';
+        var _mac_email_found = '0';              var _email_found = '';
+        var _mac_birthday_found = '0';        var _birthday_found = '';
+        var _mac_gender_found = '0';            var _gender_found = '';
+        var _mac_cmnd_found = '0';                var _cmnd_found = '';
+        var _mac_phone_verify = '0';
+        var _mac_email_verify = '0';
+        var _mac_gender_verify = '0';
+        var _mac_birthday_verify = '0';
+        var _mac_is_new_user  = '1';
+        var _mac_birthday_date_found = '0';
+        var _mac_birthday_year_found = '0';
+        var _mac_first_visit_of_day = '0';
+
+        var current_user_data = {
+            name: '',
+            day_birthday: '',
+            month_birthday: '',
+            year_birthday: '',
+            date_birthday_exist: '0',
+            year_birthday_exist: '0',
+            gender: 2,
+            mac: '',
+            phone: '',
+            email: '',
+            location: ''
+        };
+
+        // FIXED
+        var _running_action_save_tracking_splash_page = 'http://cloud2.vnwifi.com/ClientBusiness/TrackingSplashPage';
+        var _running_action_save_tracking_langding_page = 'http://cloud2.vnwifi.com/ClientBusiness/TrackingLangdingPage';
+        var _running_action_save_fb = 'http://cloud2.vnwifi.com/ClientBusiness/SaveFB';
+        var _running_action_save_google = 'http://cloud2.vnwifi.com/ClientBusiness/SaveGoogle';
+        var _running_action_save_answer = 'http://cloud2.vnwifi.com/ClientBusiness/SaveAnswer';
+        var _running_action_check_data = 'http://cloud2.vnwifi.com/ClientBusiness/CheckData';
+        var _running_action_login_wifi = 'http://cloud2.vnwifi.com/ClientBusiness/LoginPostRaw';
+        var _running_action_create_login_code_email = 'http://cloud2.vnwifi.com/ClientBusiness/CreateLoginURLAndEmail';
+        var _running_action_create_login_code_sms = 'http://cloud2.vnwifi.com/ClientBusiness/CreateLoginCodeAndSMS';
+        var _running_action_update_ip = 'http://cloud2.vnwifi.com/Global/UpdateIP';
+        var _running_frame_login = 'http://cloud2.vnwifi.com/frame-login.html';
+        var _running_action_save_basic_infor = 'http://cloud2.vnwifi.com/ClientBusiness/SaveUserBasicInfor';
+
+        var _post_type_form ='1';
+        var _post_type_json_raw ='2';
+        var _post_type_third_party_url ='3';
+
+        var _input_type_text ='text';
+        var _input_type_checkbox ='check_button';
+        var _input_type_radio ='radio_button';
+
+        var _input_type_select ='select';
+        var _input_type_rating ='rating';
+
+        var _http = 'http://';
+        var _domain = 'cloud2.vnwifi.com';
+        var _need_redirect = '';
+    </script>
+    <script>
+
+    // Init HTML DOM to display what needed
+    function ViewInit() {
+        try{document.getElementById('for-login-checkin-facebook').remove();}catch(e){}
+        // Chế độ tùy chỉnh => Không làm gì
+        if (_running_login_option.indexOf('zero') != -1) {
+            return;
+        }
+        // Nếu có Google
+        if(_running_login_option.indexOf('google')!=-1){
+
+        }else{
+            try{document.getElementById('GoogleLoginButton').remove();}catch(e){}
+        }
+        // Nếu không có Zalo
+        if(_running_login_option.indexOf('loginzalo')==-1){
+            try{document.getElementById('ZaloLogin').remove();}catch(e){}
+        }
+        // Nếu là câu hỏi nhưng đã trả lời hoặc không có câu hỏi nào
+        if(_running_login_option.indexOf('questionaire') != -1 && (_running_login_option_question_answred == '1' || (_running_login_option_question[0] == '1' && _running_login_option_question[1] == '1'))){
+            _running_login_option = _running_login_option.replace('questionaire','button');
+        }
+        // Nếu không có dùng Account Kit
+        if (_running_login_option.indexOf('facebook-code-sms') == -1) {
+            try{document.getElementById('for-login-account-kit').remove();}catch(e){}
+            try{document.getElementById('for-login-account-kit-button').remove();}catch(e){}
+        }
+        // Nếu có dùng NHƯNG đã có PHONE rồi
+        else if(_mac_phone_found=='1' && _mac_phone_verify=='1')
+        {
+            _running_login_option = _running_login_option.replace('facebook-code-sms','button');
+            try{document.getElementById('for-login-account-kit').remove();}catch(e){}
+            try{document.getElementById('for-login-account-kit-button').remove();}catch(e){}
+        }
+        else
+        {
+          //  try{document.getElementById('for-login-button').remove();}catch(e){}
+            try{document.getElementById('for-login-social-facebook').remove();}catch(e){}
+            try{document.getElementById('for-login-token').remove();}catch(e){}
+            try{document.getElementById('for-login-uid').remove();
+                document.getElementById('for-login-pwd').remove();}catch(e){}
+            try{document.getElementById('for-login-question-temp').remove();}catch(e){}
+            try{document.getElementById('for-login-code').remove();}catch(e){}
+            try{document.getElementById('for-login-request-code-button').remove();}catch(e){}
+            try{document.getElementById('for-login-code-email').remove();}catch(e){}
+        }
+        // Chế độ click kết nối để đăng nhập
+        if (_running_login_option.indexOf('button') != -1) {
+            if (_running_login_option.indexOf('social') == -1) {
+                try{document.getElementById('for-login-social-facebook').remove();}catch(e){}
+            }
+            try{document.getElementById('for-login-token').remove();}catch(e){}
+            try{document.getElementById('for-login-uid').remove();
+                document.getElementById('for-login-pwd').remove();}catch(e){}
+            if (!checkquestionaire()) {
+                try{document.getElementById('for-login-question-temp').remove();}catch(e){}
+            }
+            try{document.getElementById('for-login-code').remove();}catch(e){}
+            try{document.getElementById('for-login-request-code-button').remove();}catch(e){}
+            try{document.getElementById('for-login-code-email').remove();}catch(e){}
+        }
+        // Chế độ click FB LIKE để đăng nhập
+        if (_running_login_option.indexOf('like') != -1) {
+            try{document.getElementById('for-login-social-facebook').remove();}catch(e){}
+            try{document.getElementById('for-login-token').remove();}catch(e){}
+            try{
+                document.getElementById('for-login-uid').remove();
+                document.getElementById('for-login-pwd').remove();
+            }catch(e){}
+            try{document.getElementById('for-login-question-temp').remove();}catch(e){}
+            try{document.getElementById('for-login-button').remove();}catch(e){}
+            try{document.getElementById('for-login-code').remove();}catch(e){}
+            try{document.getElementById('for-login-request-code-button').remove();}catch(e){}
+            try{document.getElementById('for-login-code-email').remove();}catch(e){}
+        }
+        // Sử dụng TOKEN để đăng nhập
+        if (_running_login_option.indexOf('token') == -1) {
+            try{document.getElementById('for-login-token').remove();}catch(e){}
+        }
+        // Sử dụng tài khoản mật khẩu đăng nhập
+        if (_running_login_option.indexOf('account') == -1 && _running_login_option.indexOf('active_directory_users') == -1) {
+            try{document.getElementById('for-login-uid').remove();
+                document.getElementById('for-login-pwd').remove();}catch(e){}
+        }
+        // Đăng nhập bằng facebook
+        if (_running_login_option.indexOf('social') == -1) {
+            try{document.getElementById('for-login-social-facebook').remove();}catch(e){}
+        }
+        // Trả lời câu hỏi khảo sát để đăng nhập
+        if (_running_login_option.indexOf('questionaire') != -1) {
+            try{
+                var quObj = document.getElementById('for-login-question-temp');
+                //nghiệp 15/12/20017 Rating
+                var divObjQuestion = document.createElement("div");
+                divObjQuestion.setAttribute('id', 'question-list');
+                //divObjQuestion.setAttribute('style','margin:0 auto;padding:15px 10px;width:100%;max-width:480px;box-shadow:2px 2px 10px #ccc');
+                quObj.parentNode.insertBefore(divObjQuestion, quObj);
+                var qu = "";
+                var _running_login_option_question_len = _running_login_option_question.length;
+                for(var i=0 ; i<_running_login_option_question_len ; i++){
+                    var quItem = _running_login_option_question[i];
+                    var vlItem = _running_login_option_question_values[i];
+                    var typeItem = _running_login_option_question_types[i];
+
+                    var label = document.createElement("p");
+                    label.className ="question_label";
+                    label.innerHTML =  quItem;
+                    if(_running_login_option_question_required[i]=='1'){
+                        label.innerHTML +=  "<sup> (*)</sup>";
+                    }
+                    divObjQuestion.appendChild(label);
+
+                    //nghiệp 15/12/20017 Rating
+                    var colorQuestionList = document.getElementById("question-list-color");
+                    if (colorQuestionList) {
+                        divObjQuestion.setAttribute('style', colorQuestionList.getAttribute('style'));
+                    }
+
+                    // TEXT
+                    if(typeItem==_input_type_text){
+                        var new_input = document.createElement("input");
+                        new_input.setAttribute("type","text");
+                        new_input.setAttribute("class","question-item");
+                        new_input.setAttribute("data",quItem);
+                        new_input.setAttribute("placeholder",quItem);
+                        new_input.setAttribute("isrequired", _running_login_option_question_required[i]);
+
+                        var input_div = '';
+                        var input_day = '';
+                        var input_month = '';
+                        var input_year = '';
+
+                        if(_running_login_option_question_personal[i]==1){
+                            // Liên kết tên
+                            new_input.setAttribute("class","question-item check-data isname");
+                            new_input.setAttribute("value",_name_found);
+                        } else if(_running_login_option_question_personal[i]==2){
+                            // Liên kết email
+                            new_input.setAttribute("class","question-item check-data isemail");
+                            new_input.setAttribute("value",_email_found);
+                        } else if(_running_login_option_question_personal[i]==6){
+                            // Liên kết CMND
+                            new_input.setAttribute("class","question-item check-data iscmnd");
+                            new_input.setAttribute("value",_cmnd_found);
+                        }
+                        else if(_running_login_option_question_personal[i]==3){
+                            // Liên kết phone
+                            new_input.setAttribute("class","question-item check-data isphone");
+                            new_input.setAttribute("value",_phone_found);
+                        } else if(_running_login_option_question_personal[i]==5){
+                            // Liên kết năm sinh (năm)
+                            new_input.setAttribute("class","question-item check-data isbirthday");
+                        }
+                        else if(_running_login_option_question_personal[i]==7){
+                            // Liên kết ngày sinh (ngày + tháng)
+                            input_day = document.createElement("input");
+                            input_day.setAttribute("type","text");
+                            input_day.setAttribute("class","question-item");
+                            input_day.setAttribute("data", quItem);
+                            input_day.setAttribute("placeholder", "Ngày sinh");
+                            input_day.setAttribute("isrequired", _running_login_option_question_required[i]);
+                            input_day.setAttribute("class","question-item check-data isbirthdaydate birthday-day");
+
+                            input_month = document.createElement("input");
+                            input_month.setAttribute("type","text");
+                            input_month.setAttribute("class","question-item");
+                            input_month.setAttribute("data", quItem);
+                            input_month.setAttribute("placeholder", "Tháng sinh");
+                            input_month.setAttribute("isrequired", _running_login_option_question_required[i]);
+                            input_month.setAttribute("class","question-item check-data isbirthdaydate birthday-month");
+
+                            input_div = document.createElement("div");
+                            input_div.setAttribute("class", "question-item-birthday-pane");
+                            input_div.appendChild(input_day);
+                            input_div.appendChild(input_month);
+                        }
+                        else if(_running_login_option_question_personal[i]==8){
+                            // Liên kết ngày sinh (ngày + tháng + năm)
+                            input_day = document.createElement("input");
+                            input_day.setAttribute("type","text");
+                            input_day.setAttribute("class","question-item");
+                            input_day.setAttribute("data", quItem);
+                            input_day.setAttribute("placeholder", "Ngày sinh");
+                            input_day.setAttribute("isrequired", _running_login_option_question_required[i]);
+                            input_day.setAttribute("class","question-item check-data isbirthdayfull birthday-day");
+
+                            input_month = document.createElement("input");
+                            input_month.setAttribute("type","text");
+                            input_month.setAttribute("class","question-item");
+                            input_month.setAttribute("data", quItem);
+                            input_month.setAttribute("placeholder", "Tháng sinh");
+                            input_month.setAttribute("isrequired", _running_login_option_question_required[i]);
+                            input_month.setAttribute("class","question-item check-data isbirthdayfull birthday-month");
+
+                            input_year = document.createElement("input");
+                            input_year.setAttribute("type","text");
+                            input_year.setAttribute("class","question-item");
+                            input_year.setAttribute("data", quItem);
+                            input_year.setAttribute("placeholder", "Năm sinh");
+                            input_year.setAttribute("isrequired", _running_login_option_question_required[i]);
+                            input_year.setAttribute("class","question-item check-data isbirthdayfull birthday-year");
+
+                            input_div = document.createElement("div");
+                            input_div.setAttribute("class", "question-item-birthday-pane");
+                            input_div.appendChild(input_day);
+                            input_div.appendChild(input_month);
+                            input_div.appendChild(input_year);
+                        }
+                        //nghiệp 15/12/20017 Rating
+                        if(input_day!='' && input_month!='' && input_year!=''){
+                            divObjQuestion.appendChild(input_div);
+                        }
+                        else if(input_day!='' && input_month!=''){
+                            divObjQuestion.appendChild(input_div);
+                        }else{
+                            divObjQuestion.appendChild(new_input);
+                        }
+                    }
+                        // CHECK BOX
+                    else if(typeItem==_input_type_checkbox){
+                        var new_el = document.createElement("span");
+                        new_el.setAttribute("class","question-item-list-checkbox");
+                        new_el.setAttribute("data",quItem);
+                        new_el.setAttribute("isrequired", _running_login_option_question_required[i]);
+
+                        var vlItems = vlItem.split('{[*]}');
+                        var vlItemsLen = vlItems.length;
+                        for(var j = 0 ; j < vlItemsLen ; j++){
+                            var new_input = document.createElement("input");
+                            new_input.setAttribute("type","checkbox");
+                            new_input.setAttribute("data",vlItems[j]);
+                            new_el.appendChild(new_input);
+
+                            var new_input_vl = document.createElement("label");
+                            new_input_vl.innerHTML = vlItems[j];
+                            new_el.appendChild(new_input_vl);
+
+                            var new_line = document.createElement("br");
+                            new_el.appendChild(new_line);
+                        }
+                        //nghiệp 15/12/20017 Rating
+                        divObjQuestion.appendChild(new_el);
+                        //quObj.parentNode.insertBefore(new_el, quObj);
+                    }
+                        // RADIO
+                    else if(typeItem==_input_type_radio){
+                        var radio_name = 'radio_' + new Date().getDate()
+                            + '_' + new Date().getMonth()
+                            + '_' + new Date().getFullYear()
+                            + '_' + new Date().getHours()
+                            + '_' + new Date().getMinutes()
+                            + '_' + new Date().getSeconds()
+                            + '_' + new Date().getMilliseconds()
+                            + '_' + Math.floor(Math.random() * (999999 - 9999) + 9999);
+
+                        var new_el = document.createElement("span");
+                        new_el.setAttribute("class","question-item-list-radio");
+                        new_el.setAttribute("data",quItem);
+                        new_el.setAttribute("radio_name",radio_name);
+                        new_el.setAttribute("isrequired", _running_login_option_question_required[i]);
+
+                        var vlItems = vlItem.split('{[*]}');
+                        var vlItemsLen = vlItems.length;
+                        for(var j = 0 ; j < vlItemsLen ; j++){
+                            var new_input = document.createElement("input");
+                            new_input.setAttribute("name",radio_name);
+                            new_input.setAttribute("type","radio");
+                            new_input.setAttribute("data",vlItems[j]);
+                            if(_running_login_option_question_personal[i]==4){
+                                // Liên kết giới tính
+                                new_input.setAttribute("class","check-data isgender");
+                                if(_gender_found=='1' && vlItems[j]=='Nam'){
+                                    new_input.setAttribute("checked",'checked');
+                                }
+                                else if(_gender_found=='0' && vlItems[j]=='Nữ'){
+                                    new_input.setAttribute("checked",'checked');
+                                }
+                            }
+                            new_el.appendChild(new_input);
+
+                            var new_input_vl = document.createElement("label");
+                            new_input_vl.innerHTML = vlItems[j];
+                            new_el.appendChild(new_input_vl);
+
+                            var new_line = document.createElement("br");
+                            new_el.appendChild(new_line);
+                        }
+                        //nghiệp 15/12/20017 Rating
+                        divObjQuestion.appendChild(new_el);
+                        //quObj.parentNode.insertBefore(new_el, quObj);
+                    }
+                    // SELECT
+                    else if (typeItem == _input_type_select) {
+                        var new_el = document.createElement("select");
+                        new_el.setAttribute("class","question-item-select");
+                        new_el.setAttribute("data",quItem);
+                        new_el.setAttribute("isrequired", _running_login_option_question_required[i]);
+
+                        var new_inputET = document.createElement("option");
+                        new_inputET.innerHTML = '--- Chọn ----';
+                        new_inputET.setAttribute("value","");
+                        new_inputET.setAttribute("selected","selected");
+                        new_el.appendChild(new_inputET);
+
+                        var vlItems = vlItem.split('{[*]}');
+                        var vlItemsLen = vlItems.length;
+                        for(var j = 0 ; j < vlItemsLen ; j++){
+                            var new_input = document.createElement("option");
+                            new_input.innerHTML = vlItems[j];
+                            new_input.setAttribute("value",vlItems[j]);
+                            new_el.appendChild(new_input);
+                        }
+                        //nghiệp 15/12/20017 Rating
+                        divObjQuestion.appendChild(new_el);
+                        //quObj.parentNode.insertBefore(new_el, quObj);
+                    }
+                    //nghiệp 15/12/20017 Rating
+                    // RATING
+                    else if(typeItem === _input_type_rating) {
+                        var numberStar = parseInt(vlItem);
+
+                        var starsPane = document.createElement("div");
+                        starsPane.setAttribute("class","starsPane");
+
+                        var newEl = document.createElement("div");
+                        newEl.setAttribute("id", "id_"+_running_login_option_question_ids[i]);
+                        newEl.setAttribute("class", "stars rating_stars_group");
+                        newEl.setAttribute("data", quItem);
+                        newEl.setAttribute("isrequired", _running_login_option_question_required[i]);
+                        newEl.setAttribute("question_id", _running_login_option_question_ids[i]);
+                        newEl.setAttribute("style", "width: " + (numberStar * 30) + 'px;');
+                        var subNewEl = null;
+
+                        for (var j = 1; j <= numberStar; j++) {
+                            // radio button
+                            subNewEl = document.createElement("input");
+                            subNewEl.setAttribute("type", "radio");
+                            subNewEl.setAttribute("name", "star_"+i);
+                            subNewEl.setAttribute("value", j);
+                            subNewEl.setAttribute("class", "rating star-" + j);
+                            subNewEl.setAttribute("id", "star_"  + i + '_' + j);
+                            newEl.appendChild(subNewEl);
+                            // lable
+                            subNewEl = document.createElement("label");
+                            subNewEl.setAttribute("class", "star-" + j);
+                            subNewEl.setAttribute("for", "star_" + i + '_' + j);
+                            subNewEl.innerHTML = '' + j;
+                            newEl.appendChild(subNewEl);
+                        }
+                        starsPane.appendChild(newEl);
+                        subNewEl = document.createElement("span");
+                        newEl.appendChild(subNewEl);
+                        divObjQuestion.appendChild(starsPane);
+                        //quObj.parentNode.insertBefore(newEl, quObj);
+                    }
+                }
+                quObj.remove();
+                //nghiệp 15/12/20017 Rating
+                if (resize) {
+                    resize();
+                }
+            }catch(e){}
+        }
+        // Thu thập thông tin người dùng
+        else if (_running_login_option.indexOf('z-add-') != -1){
+            try{
+                var quObj = document.getElementById('for-login-question-temp');
+                // Thu thập điện thoại (nếu chưa có)
+                if(_mac_phone_found==0 && _running_login_option.indexOf('z-add-phone') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item");
+                    new_input.setAttribute("placeholder","Nhập số điện thoại để vào wifi");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+                    // Thu thập tên (nếu chưa có)
+                else if(_mac_name_found==0 && _running_login_option.indexOf('z-add-name') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item");
+                    new_input.setAttribute("placeholder","Nhập họ & tên để vào wifi");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+                    // Thu thập CMND (nếu chưa có)
+                else if(_mac_cmnd_found==0 && _running_login_option.indexOf('z-add-cmnd') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item");
+                    new_input.setAttribute("placeholder","Nhập số CMND để vào wifi");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+
+                    // Thu thập email (nếu chưa có)
+                else if(_mac_email_found==0 && _running_login_option.indexOf('z-add-email') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item");
+                    new_input.setAttribute("placeholder","Nhập Email để vào wifi");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+                    // Thu thập giới tính (nếu chưa có)
+                else if(_mac_gender_found==0 && _running_login_option.indexOf('z-add-gender') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item");
+                    new_input.setAttribute("placeholder","Bạn là NAM hay NỮ?");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+                    // Thu thập năm sinh (nếu chưa có)
+                else if(_mac_birthday_year_found=='0' && _running_login_option.indexOf('z-add-birthday') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item birthday-year");
+                    new_input.setAttribute("placeholder","Nhập năm sinh để vào wifi?");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+                }
+                    // Thu thập ngày sinh (nếu chưa có)
+                else if(_mac_birthday_date_found=='0' && _running_login_option.indexOf('z-add-datebirthday') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item birthday-day");
+                    new_input.setAttribute("placeholder","Ngày sinh?");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+
+                    var new_input2 = document.createElement("input");
+                    new_input2.setAttribute("type","text");
+                    new_input2.setAttribute("class","question-item birthday-month");
+                    new_input2.setAttribute("placeholder","Tháng sinh?");
+                    quObj.parentNode.insertBefore(new_input2, quObj);
+                }
+                    // Thu thập ngày tháng năm sinh (nếu chưa có)
+                else if((_mac_birthday_date_found=='0' || _mac_birthday_year_found=='0') && _running_login_option.indexOf('z-add-fullbirthday') != -1){
+                    var quItem = _running_login_option_question[i];
+                    var new_input = document.createElement("input");
+                    new_input.setAttribute("type","text");
+                    new_input.setAttribute("class","question-item birthday-day");
+                    new_input.setAttribute("placeholder","Ngày sinh?");
+                    quObj.parentNode.insertBefore(new_input, quObj);
+
+                    var new_input2 = document.createElement("input");
+                    new_input2.setAttribute("type","text");
+                    new_input2.setAttribute("class","question-item birthday-month");
+                    new_input2.setAttribute("placeholder","Tháng sinh?");
+                    quObj.parentNode.insertBefore(new_input2, quObj);
+
+                    var new_input3 = document.createElement("input");
+                    new_input3.setAttribute("type","text");
+                    new_input3.setAttribute("class","question-item birthday-year");
+                    new_input3.setAttribute("placeholder","Năm sinh?");
+                    quObj.parentNode.insertBefore(new_input3, quObj);
+                }
+                    // Đã đủ hết thông tin
+                else{
+                    _running_login_option = _running_login_option.replace('z-add-phone','button');
+                    _running_login_option = _running_login_option.replace('z-add-name','button');
+                    _running_login_option = _running_login_option.replace('z-add-cmnd','button');
+                    _running_login_option = _running_login_option.replace('z-add-email','button');
+                    _running_login_option = _running_login_option.replace('z-add-gender','button');
+                    _running_login_option = _running_login_option.replace('z-add-birthday','button');
+                }
+                quObj.remove();
+            }catch(e){}
+        }
+        else{try{document.getElementById('for-login-question-temp').remove();}catch(e){}}
+        // Gửi mã code qua EMAIL hoặc SMS
+        if (_running_login_option.indexOf('time-out-code-email') == -1 && _running_login_option.indexOf('time-out-code-sms') == -1){
+            try{document.getElementById('for-login-code-email').remove();}catch(e){}
+            try{document.getElementById('for-login-code-email-or-phone').remove();}catch(e){}
+            try{document.getElementById('for-login-code').remove();}catch(e){}
+            try{document.getElementById('for-login-request-code-button').remove();}catch(e){}
+        }else{
+            // Email
+            if(_running_login_option.indexOf('time-out-code-email') != -1){
+                try{
+                    try{document.getElementById('for-login-code').remove();}catch(e){}
+                    try{document.getElementById('for-login-request-code-button').remove();}catch(e){}
+                    try{
+                        document.getElementById('for-login-code-email-or-phone').setAttribute('placeholder','Nhập email của bạn');
+                        document.getElementById('for-login-code-email-or-phone').setAttribute('style','text-align:center');
+                    }catch(e){}
+                }catch(e){}
+            }
+                // SMS
+            else if(_running_login_option.indexOf('time-out-code-sms') != -1){
+                try{
+                    //document.getElementById('for-login-code-email-or-phone').setAttribute("placeholder","Số điện thoại nhận code");
+                }catch(e){}
+            }
+        }
+
+        // Tự động đăng nhập
+        if (_running_login_option.indexOf('auto') != -1) {
+            try{
+                document.getElementsByClassName('for-login-el').remove();
+            }catch(e){}
+        }
+    }
+
+    function checkquestionaire() {
+        for (var i = 0; i < _running_login_option_question_types.length; i++) {
+            if (_running_login_option_question_types[i] !== _input_type_rating) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // FIRST START > DOCUMENT READY
+    document.addEventListener('DOMContentLoaded', function () {ViewInit();}, false);
+
+    /*
+        ==============
+        MORE FUNCTIONS
+        ==============
+    */
+
+    // Check phone number right or wrong
+    function CheckPhone(phone) {
+        phone = phone.replace(/[^0-9]/g, '');
+        var numbers = /^[0-9]+$/;
+        if (!phone.match(numbers)) {
+            return false;
+        }
+        else
+        {
+            if (phone.length != 10) {
+                return false;
+            }
+            else {
+                var first = phone.substr(0, 3);
+                if (
+                    first != "096" && first!="097" && first!="098" &&
+                    first != "089" && first!="090" && first!="093" &&
+                    first != "088" && first!="091" && first!="094" &&
+                    first != "092" && first!="056" && first!="058" &&
+                    first != "032" && first!="033" && first!="034" && first!="035" && first!="036" && first!="037" && first!="038" && first!="039" &&
+                    first != "070" && first!="076" && first!="077" && first!="078" && first!="079" &&
+                    first != "081" && first!="082" && first!="083" && first!="084" && first!="085" &&
+                    first != "056" && first!="058" && first!="059" && first!="099"
+                    ) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+        }
+    }
+
+    // Check email right or wrong
+    function CheckEmail(email){
+        email = email.trim();
+        var reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return reg.test(email);
+    }
+
+    // Assign remove method in HTML DOM
+    Element.prototype.remove = function () {
+        this.parentElement.removeChild(this);
+    }
+    NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
+        for (var i = this.length - 1; i >= 0; i--) {
+            if (this[i] && this[i].parentElement) {
+                this[i].parentElement.removeChild(this[i]);
+            }
+        }
+    }
+    String.prototype.replaceAllAndTrim = function(search, replacement) {
+        var target = this;
+        while(target.indexOf(search)!=-1){
+            target = target.replace(new RegExp(search, 'g'), replacement);
+        }
+        return target.trim();
+    };
+
+    // Get value of a querystring
+    function GetQueryString(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    // Show Message
+    function _show_message(_text){
+        document.getElementById('for-process-loading').style.display = 'none';
+        document.getElementById('for-process-loading-img').style.display = 'none';
+        if(_text!=''){
+            document.getElementById('for-login-message').innerHTML= _text;
+        }
+        else if (_running_login_option.indexOf('account') != -1 || _running_login_option.indexOf('active_directory_users') != -1) {
+            document.getElementById('for-login-message').innerHTML= "Sai tài khoản hoặc mật khẩu!";
+        }
+        else
+        {
+            document.getElementById('for-login-message').innerHTML= "Không thể đăng nhập WIFI !!";
+        }
+    }
+    </script>
+
+    <!-- TEMPLATE -->
+    <style>
+        #surveyFrame {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+    </style>
+    <script>
+        var builderfolder ='est-offee';
+        var template_id = 'est-offee';
+        var main_domain = 'http://cloud2.vnwifi.com';
+        var EditMode = '';
+    </script>
+    <!--
+    LƯU Ý CHO NGƯỜI PHÁT TRIỂN TEMPALTE
+    ***********************************
+
+    1. Đối với các thẻ HTML có thuộc tính protected="1"
+       - Không được xóa thẻ
+       - Không được thay đổi giá trị thuộc tính id
+       - Không được xóa bỏ giá trị đang có của thuộc tính class (nhưng có thể thêm vô)
+       - Không được đổi loại thẻ (div, p, ...), đang là thẻ gì thì giữ nguyên vậy
+       - Không được đổi thuộc tính type nếu là thẻ input
+
+    2. Cẩn thận với Javascript vì nó có thể làm template không hoạt động đúng. Chỉ nên sử dụng
+       khi thực sự quá cần thiết. (để làm hiệu ứng, ...)
+
+    6. Đây là danh sách định dạng các giá trị động mà bạn sẽ cần trong quá trình thiết kế HTML template:
+
+       https://cdn2.vnwifi.com/templates/users/demo/est-offee/version_1 : trả về đường dẫn URL đến thư mục template của bạn.
+            VÍ DỤ: <img src="https://cdn2.vnwifi.com/templates/users/demo/est-offee/version_1/your_image.jpg" />
+            KHI CHẠY: <img src="http://example.com/templates/your_template/your_version/your_image.jpg" />
+       http://cloud2.vnwifi.com : trả về tên miền và protocol đang chạy.
+            VÍ DỤ: https://your_domain.com
+       {u-name} : Họ và tên của người dùng (nếu có)
+       {u-email} : Email của người dùng (nếu có)
+       {u-phone} : Số phone của người dùng (nếu có)
+       {u-image} : ảnh của người dùng (nếu có)
+       {u-gender-nam-nu} : ra chữ nam hoặc nữ tương ứng với giới tính người dùng. Nếu chưa rõ sẽ ra chữ nam/nữ
+       {u-gender-anh-chi} : ra chữ anh hoặc chị tương ứng với giới tính người dùng. Nếu chưa rõ sẽ ra chữ anh/chị
+-->
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .BG {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background-position: center top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: fixed;
+        z-index: 1;
+        opacity: 0;
+         filter: blur(16px) brightness(1.2);
+        -webkit-filter: blur(16px) brightness(1.2);
+        -moz-filter: blur(16px) brightness(1.2);
+        -ms-filter: blur(16px) brightness(1.2);
+        -o-filter: blur(16px) brightness(1.2);
+        transform: scale(1.1);
+    }
+
+    #BG1 {
+        opacity: 1;
+    }
+
+    /* Nội dung */
+    #Container {
+        margin: 0 auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 600px;
+        z-index: 2;
+    }
+    .dontmove{
+        top:0;
+        transform: translateY(0);
+    }
+
+    .Banner {
+        margin: 0 auto;
+        width: 95%;
+        display: block;
+        margin-bottom: 10px;
+        max-height: 767px;
+    }
+
+        .Banner.Data {
+            position: absolute;
+            top: 0px;
+            left: 100%;
+            z-index: 2;
+            opacity: 0;
+        }
+
+    #Banner1 {
+        opacity: 1;
+        left: 2.5%;
+    }
+
+    #scroll {
+        margin: 0;
+        padding: 0;
+        width: 0%;
+        height: 5px;
+        position: absolute;
+        top: -2px;
+        left: 2.5%;
+        z-index: 3;
+        background-color: #b41718;
+    }
+
+    #for-login-button2 {
+        margin: 0 auto;
+        width: 250px;
+        text-align: center;
+        padding: 10px 0px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+        #for-login-button:hover {
+            background: #ce1719;
+        }
+
+    .btb1 {
+        background: #b41718;
+    }
+
+        .btb1:hover {
+            background: #ce1719;
+        }
+
+    input.question-item {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        padding: 10px 0px;
+        text-align: center;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        width: 95%;
+    }
+
+    .question_label {
+        display: none;
+    }
+
+    #for-login-message {
+        margin: .75em auto 0 auto;
+        padding: .5em;
+        color:#fff;
+        font-size: 12px;
+        text-align: center;
+        background-color: rgba(0,0,0,.3);
+        border-radius: .25em;
+        width: 230px;
+    }
+    #txtName, #txtPhone{
+        display:none;
+    }
+</style>
+
+<div class="BG" id="BG1" style="background-image: url(./assets/img/espot_intro_img01.jpg)"></div>
+<div class="BG" id="BG2" style="background-image: url(./assets/img/espot_intro_img02.jpg)"></div>
+<div class="BG" id="BG3" style="background-image: url(./assets/img/espot_intro_img03.jpg)"></div>
+
+<div id="Container">
+    <img src="https://cdn2.vnwifi.com/templates/users/demo/est-offee/version_1/Empty600x800.png" id="Empty600x800" class="Banner" />
+    <div id="scroll"></div>
+    <img src="./assets/img/espot_intro_img01.jpg" id="Banner1" class="Banner Data" />
+    <img src="./assets/img/espot_intro_img02.jpg" id="Banner2" class="Banner Data" />
+    <img src="./assets/img/espot_intro_img03.jpg" id="Banner3" class="Banner Data" />
+</div>
+<div id="for-login-button" style="display:none;position:absolute;z-index:-1;opacity:0" class="btb1">CONNECT WIFI</div>
+<script>
+
+    // Thời gian chuyển slide (mili giây)
+    var timeout = 300;
+    
+    // Thời gian dừng lại mỗi lần chuyển (mili giây)
+    var waiting = 3000;
+    
+    // Khởi chạy
+    document.addEventListener('DOMContentLoaded', function () {
+        AutoDetectSize();
+        if($('img.Banner.Data').length > 1){
+            setTimeout("GoNext()", waiting);
+            $('#scroll').stop(true).animate({ width: '100%' }, waiting);
+        }
+    }, false);
+
+    // Tự đều chỉnh kích thước theo màn hình
+    var AutoDetectSizeTimeHold;
+    var OldHeight = 0;
+    var OldWidth = 0;
+    function AutoDetectSize() {
+        try { clearTimeout(AutoDetectSizeTimeHold); } catch (e) { }
+        var cHeight = $(window).height();
+        var cWidth = $(window).width();
+        if (cHeight != OldHeight || cWidth != OldWidth) {
+            var leftH = _running_login_option_question_answred == '1' ? 50 : 200;
+            // --
+            var xH = cHeight;
+            var xW = 0;
+            if (cHeight < 800) {
+                $('#for-login-container').addClass('dontmove');
+            }
+            // --
+            var xW = (6 * (xH - leftH)) / 8;
+            if (xW > cWidth) {
+                xW = cWidth;
+            }
+            if (xW < 300) xW = 300;
+            // --
+            $('#Container').stop(true).animate({
+                width: xW + 'px'
+            }, 300);
+            OldHeight = cHeight;
+            OldWidth = cWidth;
+        }
+        AutoDetectSizeTimeHold = setTimeout("AutoDetectSize()", 1000);
+    }
+
+    var c_index = 1;
+    var m_index = $('img.Banner.Data').length;
+    // Chuyển hình ảnh của slide
+    function GoNext() {
+        var n_index = c_index == m_index ? 1 : (c_index + 1);
+        console.log('SLIDE ' + n_index);
+        // BTB
+        //$('#for-login-button').attr('class','btb'+n_index);
+        // scroll
+        $('#scroll').stop(true).animate({
+            width: '0%'
+        }, timeout);
+        // Slide out
+        $('#BG' + c_index).stop(true).animate({
+            opacity:0
+        }, timeout);
+        $('#Banner' + c_index).stop(true).animate({
+            left: '-100%',
+            opacity: 0
+        }, timeout, function () {
+            $('#Banner' + c_index).css('left', '100%');
+            c_index = n_index;
+        });
+        // Slide in
+        $('#BG' + n_index).stop(true).animate({
+            opacity: 1
+        }, timeout);
+        $('#Banner' + n_index).stop(true).animate({
+            left: '2.5%',
+            opacity: 1
+        }, timeout, function () {
+            setTimeout("GoNext()", waiting);
+            $('#scroll').stop(true).animate({ width: '95%' }, waiting);
+        });
+    }
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#Container').slick();
+    });
+  </script>
+    <!-- FIXED -->
+    <div id="for-process-loading" class="for-loading">&nbsp;</div>
+    <div id="for-process-loading-img" class="for-loading">&nbsp;</div>
+    <div id="waiting5s">
+        <p style="margin:0px;padding:0px;min-width:150px">Chờ 0 giây</p>
+    </div>
+</body>
+</html>
